@@ -1,185 +1,247 @@
-# MyBrowserControl MCP Server
+# MyBrowserControl
 
-> **Advanced browser automation MCP server built on Microsoft Playwright MCP foundation**
+**Advanced browser automation MCP server built on Microsoft Playwright MCP foundation**
 
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
-[![MCP](https://img.shields.io/badge/MCP-1.0-green.svg)](https://modelcontextprotocol.io/)
-[![Playwright](https://img.shields.io/badge/Playwright-Latest-orange.svg)](https://github.com/microsoft/playwright-mcp)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
+[![Node Version](https://img.shields.io/badge/node-%3E%3D18.0.0-brightgreen.svg)](package.json)
 
-## Overview
+## 🎯 Overview
 
-MyBrowserControl is a Model Context Protocol (MCP) server that provides advanced browser automation capabilities for AI assistants like Cline, Claude Desktop, and other MCP-compatible applications.
+MyBrowserControl is a unified browser automation MCP (Model Context Protocol) server that combines the best features from multiple browser automation solutions:
 
-Built on the foundation of [Microsoft's Playwright MCP](https://github.com/microsoft/playwright-mcp), MyBrowserControl extends it with:
+- **Microsoft Playwright MCP** - Enterprise-grade foundation (21.4k stars, 96% issue resolution)
+- **AgentDesk AI** - Lighthouse audits and advanced tooling
+- **BrowserMCP** - Stealth mode and session management
 
-- 🎯 **Accessibility-First Architecture** - No vision models needed
-- 🔒 **Stealth Mode Capabilities** - Evade bot detection
-- 📊 **Lighthouse Integration** - Automated QA audits
-- 🖼️ **Smart Screenshot Management** - Token-optimized compression
-- 💾 **Session State Preservation** - Multi-tab support and save/restore
+### Three-Mode Architecture
 
-## Features
+1. **Native Mode** (Default) - Fast, direct Playwright automation
+2. **Lighthouse Mode** - Performance audits and QA analysis
+3. **Extension Mode** - Connect to existing browser sessions
 
-### Core Capabilities (Powered by Playwright MCP)
-- ✅ Multi-browser support (Chrome, Firefox, WebKit)
-- ✅ 25+ built-in automation tools
-- ✅ Structured accessibility tree navigation
-- ✅ Deterministic tool application
-- ✅ Enterprise-grade reliability (96% issue resolution rate)
+## 🚀 Quick Start
 
-### MyBrowserControl Extensions
-- 🚀 **Three Deployment Modes**
-  - **Native Mode**: Fast, Playwright-only automation
-  - **Lighthouse Mode**: QA audits and performance testing
-  - **Extension Mode**: Connect to existing browser sessions
-- 🎨 **Token Optimization**: Smart screenshot compression and auto-paste
-- 🔄 **Session Management**: Save/restore browser state across sessions
-- 🕵️ **Stealth Features**: Advanced bot detection evasion
-
-## Installation
-
-### Prerequisites
-- Node.js 18+ or Docker
-- MCP-compatible application (Cline, Claude Desktop, etc.)
-
-### Quick Start with Docker (Recommended)
-
-```bash
-# Pull the Docker image (when available)
-docker pull ghcr.io/satwareag/mybrowsercontrol:latest
-
-# Add to your MCP configuration
-```
-
-### Install from npm (Coming Soon)
+### Installation
 
 ```bash
 npm install -g @mybrowsercontrol/mcp
 ```
 
-## Configuration
+### Basic Usage
 
-### For Cline (IntelliJ IDEA Plugin)
+```bash
+# Start server in native mode (default)
+mybrowsercontrol
 
-Add to `~/.cline/data/settings/cline_mcp_settings.json`:
+# Start in Lighthouse mode
+mybrowsercontrol --mode lighthouse
+
+# Start in headless mode
+mybrowsercontrol --headless
+```
+
+### MCP Configuration
+
+Add to your `~/.cline/mcp_servers.json`:
 
 ```json
 {
   "mcpServers": {
-    "mybrowsercontrol": {
-      "disabled": false,
-      "timeout": 60,
-      "type": "stdio",
-      "command": "docker",
-      "args": [
-        "run",
-        "-i",
-        "--rm",
-        "ghcr.io/satwareag/mybrowsercontrol"
-      ]
+    "browser": {
+      "command": "npx",
+      "args": ["@mybrowsercontrol/mcp@latest"]
     }
   }
 }
 ```
 
-### For Claude Desktop
-
-Add to `claude_desktop_config.json`:
+Or for local development:
 
 ```json
 {
   "mcpServers": {
-    "mybrowsercontrol": {
-      "command": "docker",
-      "args": ["run", "-i", "--rm", "ghcr.io/satwareag/mybrowsercontrol"]
+    "browser": {
+      "command": "node",
+      "args": ["/home/mw/Projects/mybrowsercontrol/dist/index.js"]
     }
   }
 }
 ```
 
-## Usage
+## 📚 Available Tools
 
-Once configured, MyBrowserControl tools will be available in your MCP client:
+### Core Tools (v0.1.0)
+
+- `browser_navigate` - Navigate to a URL
+- `browser_screenshot` - Capture page screenshot
+- `browser_content` - Get page HTML content
+- `browser_close` - Close the browser
+
+### Coming Soon (Phase 2-3)
+
+- `browser_lighthouse_audit` - Run Lighthouse performance audits
+- `browser_session_save` - Save browser session state
+- `browser_session_restore` - Restore saved session
+- `browser_stealth_enable` - Enable anti-detection mode
+- `browser_optimize_tokens` - AI-optimized result filtering
+
+## 🏗️ Architecture
 
 ```
-# Example: Launch browser and navigate
-> Launch browser and go to https://example.com
-
-# Example: Run Lighthouse audit
-> Run a Lighthouse audit on the current page
-
-# Example: Take optimized screenshot
-> Take a screenshot and compress it for token efficiency
+┌─────────────────────────────────────┐
+│     AI Assistant (Cline/Claude)      │
+└──────────────┬──────────────────────┘
+               │ MCP Protocol
+               ▼
+┌─────────────────────────────────────┐
+│   MyBrowserControl MCP Server        │
+│                                      │
+│  ┌────────────────────────────────┐ │
+│  │  Core: Playwright Foundation   │ │
+│  │  - 3 deployment modes          │ │
+│  │  - Multi-browser support       │ │
+│  │  - Accessibility-first         │ │
+│  └────────────────────────────────┘ │
+│                                      │
+│  ┌────────────────────────────────┐ │
+│  │  Extensions (Coming Soon)      │ │
+│  │  - Lighthouse integration      │ │
+│  │  - Stealth mode                │ │
+│  │  - Session management          │ │
+│  │  - Screenshot optimization     │ │
+│  └────────────────────────────────┘ │
+└──────────────┬──────────────────────┘
+               │ Playwright API
+               ▼
+        ┌──────────────┐
+        │   Browser    │
+        │ (Chrome/FF)  │
+        └──────────────┘
 ```
 
-## Development Roadmap
+## 🛠️ Development
 
-### Phase 1-2: Foundation & Extensions (Months 1-3)
-- [x] Project setup and structure
-- [ ] Playwright MCP integration
-- [ ] Mode system implementation (Native, Lighthouse, Extension)
-- [ ] Basic tool extensions
+### Prerequisites
+
+- Node.js 18+
+- npm or yarn
+- Git
+
+### Setup
+
+```bash
+# Clone repository
+git clone https://github.com/satwareAG/mybrowsercontrol.git
+cd mybrowsercontrol
+
+# Install dependencies
+npm install
+
+# Build
+npm run build
+
+# Run in development mode
+npm run dev
+```
+
+### Project Structure
+
+```
+mybrowsercontrol/
+├── src/
+│   ├── index.ts              # Entry point
+│   ├── server.ts             # MCP server implementation
+│   ├── config/
+│   │   └── types.ts          # Configuration types
+│   ├── core/
+│   │   └── playwright.ts     # Playwright wrapper
+│   ├── extensions/           # Future extensions
+│   │   ├── lighthouse/
+│   │   ├── stealth/
+│   │   ├── screenshot/
+│   │   └── session/
+│   └── tools/                # MCP tool implementations
+├── dist/                     # Compiled output
+├── docs/                     # Documentation
+└── tests/                    # Test suite
+```
+
+## 📖 Documentation
+
+- [Getting Started](docs/getting-started.md) *(coming soon)*
+- [Configuration Guide](docs/configuration.md) *(coming soon)*
+- [API Reference](docs/api.md) *(coming soon)*
+- [Integration Plan](docs/FINAL_INTEGRATION_PLAN.md)
+- [Integration Analysis](docs/integration-analysis.md)
+
+## 🗺️ Roadmap
+
+### Phase 1: Foundation (Current - Months 1-2)
+- [x] Project structure and TypeScript setup
+- [x] Core Playwright wrapper
+- [x] Basic MCP server implementation
+- [x] Native mode with 4 core tools
+- [ ] Testing framework
+- [ ] CI/CD pipeline
+
+### Phase 2: Extensions (Month 3)
+- [ ] Lighthouse integration
+- [ ] Screenshot optimization
+- [ ] AI-optimized result filtering
+- [ ] Extended tool set
 
 ### Phase 3: Advanced Features (Month 4)
-- [ ] Session management system
-- [ ] Stealth mode implementation
-- [ ] Token optimization engine
+- [ ] Multi-tab session management
+- [ ] Stealth mode
+- [ ] Session save/restore
+- [ ] Selective tool loading
 
 ### Phase 4: Polish & Release (Months 5-6)
-- [ ] Documentation completion
-- [ ] Performance optimization
-- [ ] v1.0 release
+- [ ] Comprehensive testing
+- [ ] Performance benchmarking
+- [ ] Complete documentation
+- [ ] v1.0.0 public release
 
-See [FINAL_INTEGRATION_PLAN.md](./docs/FINAL_INTEGRATION_PLAN.md) for complete roadmap.
+## 🤝 Contributing
 
-## Architecture
+Contributions are welcome! This is an open-source project under the Apache 2.0 license.
 
-MyBrowserControl uses a layered architecture:
+### Development Workflow
 
-```
-Cline/Claude → MyBrowserControl MCP Server
-  ├── Core: @playwright/mcp (Microsoft Foundation)
-  ├── Extensions:
-  │   ├── Lighthouse (QA Audits)
-  │   ├── Stealth Mode (Bot Evasion)
-  │   ├── Smart Screenshots (Token Optimization)
-  │   └── Session Manager (State Persistence)
-  └── Modes:
-      ├── Native (Fast Playwright automation)
-      ├── Lighthouse (Performance testing)
-      └── Extension (Existing browser sessions)
-```
+1. Fork the repository
+2. Create a feature branch
+3. Make your changes
+4. Add tests
+5. Submit a pull request
 
-## Documentation
+## 📄 License
 
-- [Getting Started](./docs/getting-started.md) - Installation and setup guide
-- [Modes](./docs/modes.md) - Understanding deployment modes
-- [Tools](./docs/tools.md) - Complete tools reference
-- [Integration Plan](./docs/FINAL_INTEGRATION_PLAN.md) - Development roadmap
-- [Architecture](./docs/architecture.md) - Technical architecture details
+Apache License 2.0 - See [LICENSE](LICENSE) file for details.
 
-## Contributing
+## 🙏 Acknowledgments
 
-Contributions are welcome! Please see [CONTRIBUTING.md](./CONTRIBUTING.md) for guidelines.
+Built on the shoulders of giants:
 
-## License
+- **Microsoft Playwright MCP** - Foundation and core architecture
+- **AgentDesk AI** - Lighthouse integration inspiration
+- **BrowserMCP** - Stealth mode techniques
+- **Model Context Protocol** - MCP SDK and specification
 
-Apache License 2.0 - See [LICENSE](./LICENSE) for details.
+## 📞 Support
 
-## Acknowledgments
+- **Issues**: [GitHub Issues](https://github.com/satwareAG/mybrowsercontrol/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/satwareAG/mybrowsercontrol/discussions)
+- **Email**: ja@satware.ai
 
-- Built on [Microsoft Playwright MCP](https://github.com/microsoft/playwright-mcp)
-- Inspired by [BrowserMCP](https://github.com/BrowserMCP/mcp) stealth techniques
-- Lighthouse integration patterns from [AgentDesk AI](https://github.com/AgentDeskAI/browser-tools-mcp)
+## 🔗 Links
 
-## Project Status
-
-**Current Status:** 🚧 Active Development (Pre-Alpha)
-
-- Repository: https://github.com/satwareAG/mybrowsercontrol
-- Maintained by: [satware AG](https://satware.ai)
-- Contact: ja@satware.ai
+- [GitHub Repository](https://github.com/satwareAG/mybrowsercontrol)
+- [npm Package](https://www.npmjs.com/package/@mybrowsercontrol/mcp) *(pending publication)*
+- [Documentation](https://github.com/satwareAG/mybrowsercontrol/tree/main/docs)
+- [Changelog](CHANGELOG.md) *(coming soon)*
 
 ---
 
-**Note:** This project is in early development. Features and APIs are subject to change.
+**Status**: 🚧 Active Development (v0.1.0 - Phase 1)
+
+**Made with ❤️ by satware AG**
