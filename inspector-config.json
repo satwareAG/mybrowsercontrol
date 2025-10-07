@@ -1,0 +1,9 @@
+{
+  "mcpServers": {
+    "mybrowsercontrol": {
+      "command": "node",
+      "args": ["dist/index.js"],
+      "env": {}
+    }
+  }
+}

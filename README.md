@@ -166,6 +166,56 @@ mybrowsercontrol/
 └── tests/                    # Test suite
 ```
 
+## 🧪 Testing
+
+MyBrowserControl follows Test-Driven Design (TDD) principles with comprehensive test coverage:
+
+### Test Suite Status
+
+- **Unit Tests**: ✅ 46 tests passing
+- **Application Tests**: 🚧 Pending implementation
+- **Integration Tests**: 🚧 Pending implementation  
+- **Acceptance Tests**: 🚧 Pending implementation
+
+### Running Tests
+
+```bash
+# Run all unit tests
+npm run test:unit
+
+# Run with coverage
+npm run test:unit -- --coverage
+
+# Watch mode for TDD
+npm run test:watch
+
+# Run all tests (when implemented)
+npm test
+```
+
+### Manual Testing with MCP Inspector
+
+Test tools interactively using the official MCP Inspector:
+
+```bash
+# Build project
+npm run build
+
+# Launch Inspector
+npx @modelcontextprotocol/inspector node dist/index.js
+```
+
+The Inspector provides a web UI to:
+- List all available MCP tools
+- Execute tools with custom parameters
+- View responses and debug issues
+- Monitor MCP protocol messages
+
+### Documentation
+
+- **[Testing Guide](docs/TESTING.md)** - Comprehensive testing strategy
+- **[Inspector Guide](docs/INSPECTOR.md)** - MCP Inspector usage and debugging
+
 ## 📖 Documentation
 
 - [Getting Started](docs/getting-started.md) *(coming soon)*
@@ -173,6 +223,8 @@ mybrowsercontrol/
 - [API Reference](docs/api.md) *(coming soon)*
 - [Integration Plan](docs/FINAL_INTEGRATION_PLAN.md)
 - [Integration Analysis](docs/integration-analysis.md)
+- [Testing Guide](docs/TESTING.md) ✅
+- [Inspector Guide](docs/INSPECTOR.md) ✅
 
 ## 🗺️ Roadmap
 
