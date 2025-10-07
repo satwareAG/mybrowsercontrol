@@ -1,0 +1,58 @@
+{
+  "name": "@mybrowsercontrol/mcp",
+  "version": "0.1.0",
+  "description": "Advanced browser automation MCP server built on Microsoft Playwright MCP foundation",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "mybrowsercontrol": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "lint": "eslint src/",
+    "lint:fix": "eslint src/ --fix",
+    "format": "prettier --write \"src/**/*.ts\"",
+    "prepare": "npm run build"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "browser",
+    "automation",
+    "playwright",
+    "lighthouse",
+    "stealth",
+    "ai",
+    "assistant"
+  ],
+  "author": "satware AG <ja@satware.ai>",
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/satwareAG/mybrowsercontrol.git"
+  },
+  "bugs": {
+    "url": "https://github.com/satwareAG/mybrowsercontrol/issues"
+  },
+  "homepage": "https://github.com/satwareAG/mybrowsercontrol#readme",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "@playwright/test": "^1.40.0",
+    "playwright": "^1.40.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "eslint": "^8.0.0",
+    "jest": "^29.0.0",
+    "prettier": "^3.0.0",
+    "typescript": "^5.0.0"
+  }
+}
