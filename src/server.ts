@@ -179,11 +179,7 @@ export class MyBrowserControlServer {
   async start(): Promise<void> {
     const transport = new StdioServerTransport();
     await this.server.connect(transport);
-    
-    // Log startup info to stderr (stdout is reserved for MCP protocol)
-    console.error(`MyBrowserControl MCP Server v0.1.0`);
-    console.error(`Mode: ${this.config.mode}`);
-    console.error(`Server running on stdio transport`);
+    // Server started - MCP protocol communication via stdio
   }
 
   /**
