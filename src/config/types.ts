@@ -102,6 +102,7 @@ export interface MyBrowserControlConfig {
     width: number;
     height: number;
   };
+  executablePath?: string;
 }
 
 /**

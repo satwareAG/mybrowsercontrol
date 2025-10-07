@@ -14,9 +14,9 @@ import { BrowserMode } from './config/types.js';
 /**
  * Parse command line arguments
  */
-function parseArgs(): { mode?: BrowserMode; headless?: boolean } {
+function parseArgs(): { mode?: BrowserMode; headless?: boolean; executablePath?: string } {
   const args = process.argv.slice(2);
-  const config: { mode?: BrowserMode; headless?: boolean } = {};
+  const config: { mode?: BrowserMode; headless?: boolean; executablePath?: string } = {};
 
   for (let i = 0; i < args.length; i++) {
     const arg = args[i];
@@ -31,6 +31,9 @@ function parseArgs(): { mode?: BrowserMode; headless?: boolean } {
       config.headless = true;
     } else if (arg === '--headed') {
       config.headless = false;
+    } else if ((arg === '--executable-path' || arg === '--browser-path') && i + 1 < args.length) {
+      config.executablePath = args[i + 1];
+      i++;
     }
   }
 

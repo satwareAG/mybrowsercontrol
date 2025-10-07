@@ -38,6 +38,15 @@ mybrowsercontrol --mode lighthouse
 
 # Start in headless mode
 mybrowsercontrol --headless
+
+# Start with headed mode (visible browser window)
+mybrowsercontrol --headed
+
+# Use system-installed browser instead of Playwright's bundled browser
+mybrowsercontrol --executable-path /usr/bin/chromium
+
+# Combined: headed mode with system browser
+mybrowsercontrol --headed --executable-path /usr/bin/chromium
 ```
 
 ### MCP Configuration

@@ -29,10 +29,15 @@ export class PlaywrightCore {
    * Launch browser instance
    */
   async launch(browserType: BrowserType = 'chromium'): Promise<void> {
-    const launchOptions = {
+    const launchOptions: any = {
       headless: this.config.headless ?? true,
       timeout: this.config.timeout ?? 30000
     };
+
+    // Add executablePath if specified (for using system browser)
+    if (this.config.executablePath) {
+      launchOptions.executablePath = this.config.executablePath;
+    }
 
     // Select browser based on type
     switch (browserType) {
